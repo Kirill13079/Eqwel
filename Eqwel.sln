@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqwel.Android", "Eqwel\Eqwel.Android\Eqwel.Android.csproj", "{D7521434-C622-4A8C-AC97-F5069FD3BBFA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eqwel", "Eqwel\Eqwel\Eqwel.csproj", "{809F9702-F446-4325-ADB8-2DC9E672794F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7521434-C622-4A8C-AC97-F5069FD3BBFA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{809F9702-F446-4325-ADB8-2DC9E672794F}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {644FFC21-E649-4101-8F8E-31022B27D8C6}
+	EndGlobalSection
+EndGlobal

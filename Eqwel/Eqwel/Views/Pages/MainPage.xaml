@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             x:Class="Eqwel.Views.Pages.MainPage"
+             BackgroundColor="{DynamicResource PrimaryColor}">
+
+    <Grid RowDefinitions="*,80">
+        <AbsoluteLayout>
+            <pnck:PancakeView x:Name="StartFrame"
+                              AbsoluteLayout.LayoutBounds="0,0,100,100" 
+                              AbsoluteLayout.LayoutFlags="None">
+                <Grid>
+                    <Rectangle x:Name="mainRect" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <Rectangle.Background>
+                            <LinearGradientBrush>
+                                <GradientStop x:Name="tealGrad" Color="Transparent" Offset="0"/>
+                                <GradientStop x:Name="orangeGrad" Color="{DynamicResource AccentColor}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Rectangle.Background>
+                    </Rectangle>
+
+                    <Label Text="start"
+                       FontFamily="Bold"
+                       FontSize="50"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"/>
+
+                </Grid>
+            </pnck:PancakeView>
+        </AbsoluteLayout>
+    </Grid>
+</ContentPage>
