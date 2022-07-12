@@ -7,6 +7,13 @@
     <Color x:Key="SecondaryColor">#040615</Color>
     <Color x:Key="TertiaryColor">#E5E5E5</Color>
     <Color x:Key="AccentColor">#84F73E</Color>
+    <Color x:Key="ComponentColor"> White </Color>
+    <Color x:Key="PageBackgroundColor">#efefef</Color>
+
+    <Style TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="#efefef"/>
+        <Setter Property="BarTextColor" Value="#040615"/>
+    </Style>
     
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Styles/Global.xaml" />

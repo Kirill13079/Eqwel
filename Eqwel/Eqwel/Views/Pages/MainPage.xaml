@@ -2,33 +2,100 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
-             xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView" 
+             xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView" 
+             xmlns:converters="clr-namespace:Eqwel.Converters"
              x:Class="Eqwel.Views.Pages.MainPage"
-             BackgroundColor="{DynamicResource PrimaryColor}">
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
+             NavigationPage.HasNavigationBar="False">
 
-    <Grid RowDefinitions="*,80">
-        <AbsoluteLayout>
-            <pnck:PancakeView x:Name="StartFrame"
-                              AbsoluteLayout.LayoutBounds="0,0,100,100" 
-                              AbsoluteLayout.LayoutFlags="None">
-                <Grid>
-                    <Rectangle x:Name="mainRect" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                        <Rectangle.Background>
-                            <LinearGradientBrush>
-                                <GradientStop x:Name="tealGrad" Color="Transparent" Offset="0"/>
-                                <GradientStop x:Name="orangeGrad" Color="{DynamicResource AccentColor}" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Rectangle.Background>
-                    </Rectangle>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!--<converters:StringToBoolConverter x:Key="ModeConvertert" Mode="{Binding Mode}"/>-->
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <Grid RowDefinitions="60,*,120" Padding="10">
+        <StackLayout>
+            <Label FontSize="{StaticResource H1FontSize}"
+                   VerticalOptions="Center"
+                   TextColor="Green"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Black"
+                   Text="{Binding Correctly}"/>
+            <Label FontSize="{StaticResource H1FontSize}"
+                   TextColor="Red"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Black"
+                   Text="{Binding Wrong}"/>
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="10"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Black"
+                   Text="{Binding CurrentIndex} "/>
+                <Label FontSize="10"
+                   VerticalOptions="Center"
+                   HorizontalOptions="CenterAndExpand"
+                   FontFamily="Black"
+                   Text="{Binding Model.Items.Count}"/>
+            </StackLayout>
+        </StackLayout>
+        <cards:CarouselView x:Name="carouselView"
+                            ItemsSource="{Binding Model.Items}"
+                            Grid.Row="1"
+                            IsVerticalSwipeEnabled="False"
+                            SelectedIndex="{Binding CurrentIndex}">
 
-                    <Label Text="start"
-                       FontFamily="Bold"
-                       FontSize="50"
-                       VerticalOptions="CenterAndExpand"
-                       HorizontalOptions="CenterAndExpand"/>
+            <x:Arguments>
+                <proc:CarouselProcessor ScaleFactor="0.5" OpacityFactor="0" RotationFactor="0.1" />
+            </x:Arguments>
 
-                </Grid>
+            <cards:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <ContentView>
+                        <Grid Padding="20">
+                            <pnck:PancakeView CornerRadius="20" IsVisible="{Binding IsUse}">
+                                <StackLayout BackgroundColor="{DynamicResource ComponentColor}" 
+                                             Padding="10">
+                                    <Label Text="{Binding Russian}"
+                                           FontSize="{StaticResource H1FontSize}"
+                                           FontFamily="Medium"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand"
+                                           IsVisible="{Binding Mode}">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" 
+                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
+                                                         Value="True">
+                                                <Setter Property="Text" 
+                                                        Value="{Binding Russian}"/>
+                                            </DataTrigger>
+                                            <DataTrigger TargetType="Label" 
+                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
+                                                         Value="False">
+                                                <Setter Property="Text" 
+                                                        Value="{Binding English}"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+                                </StackLayout>
+                            </pnck:PancakeView>
+                        </Grid>
+                    </ContentView>
+                </DataTemplate>
+            </cards:CarouselView.ItemTemplate>
+        </cards:CarouselView>
+        <StackLayout Grid.Row="2" Padding="20,0">
+            <Entry x:Name="testEntry"></Entry>
+            <pnck:PancakeView BackgroundColor="{DynamicResource ComponentColor}" VerticalOptions="FillAndExpand" CornerRadius="20">
+                <pnck:PancakeView.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding AcceptCommand}" CommandParameter="{Binding Source={x:Reference testEntry}, Path=Text}"/>
+                </pnck:PancakeView.GestureRecognizers>
+                <Label Text="ok" VerticalOptions="Center" HorizontalOptions="Center"/>
             </pnck:PancakeView>
-        </AbsoluteLayout>
+        </StackLayout>
     </Grid>
 </ContentPage>

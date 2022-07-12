@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Eqwel.Service
 {
-    public class ApiCaller
+    public class ApiCallerService
     {
         public static async Task<string> Get(string url)
         {
