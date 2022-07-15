@@ -1,5 +1,7 @@
 ﻿using Eqwel.Animations;
 using Eqwel.ViewModels.Data;
+using SkiaSharp;
+using SkiaSharp.Views.Forms;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +13,8 @@ namespace Eqwel.Views.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class StartPage : ContentPage
     {
+        private SkiaSharp.Elements.Rectangle _rectangle;
+        private SKPoint _startLocation;
         private AnimationStateMachine _animationState;
         private enum State
         {
@@ -36,13 +40,17 @@ namespace Eqwel.Views.Pages
             base.OnAppearing();
 
             SizeChanged += StartPageSizeChanged;
+
+            AddRectangle();
+
+            Play();
         }
 
         private void StartPageSizeChanged(object sender, EventArgs e)
         {
             #region start frame position + menu frame
 
-            var startFrameRect = new Rectangle(0, Height / 2, Width, 100);
+            var startFrameRect = new Rectangle(0, 0, Width, 100);
             var endFrameRect = new Rectangle(0, 100, Width, 100);
 
             var startMenuComponentRect = new Rectangle(0, Height, Width, Height / 2);
@@ -63,13 +71,13 @@ namespace Eqwel.Views.Pages
 
             _animationState.Add(State.Start, new ViewTransition[]
             {
-                new ViewTransition(startFrame, Enums.AnimationType.Layout, startFrameRect),
+                new ViewTransition(canvas, Enums.AnimationType.Layout, startFrameRect),
                 new ViewTransition(menuItemFrame, Enums.AnimationType.Layout, startMenuComponentRect)
             });
 
             _animationState.Add(State.End, new ViewTransition[] 
             {
-                new ViewTransition(startFrame, Enums.AnimationType.Layout, endFrameRect),
+                new ViewTransition(canvas, Enums.AnimationType.Layout, endFrameRect),
                 new ViewTransition(menuItemFrame, Enums.AnimationType.Layout, endMenuComponentRect)
             });
 
@@ -118,6 +126,44 @@ namespace Eqwel.Views.Pages
             }
 
             return base.OnBackButtonPressed();
+        }
+
+        private void Play()
+        {
+            new Animation((value) =>
+            {
+                canvas.SuspendLayout();
+
+                _rectangle.Transformation = SKMatrix.CreateRotationDegrees(360 * (float)value);
+
+                _rectangle.Location = new SKPoint(_startLocation.X + (100 * (float)value),
+                                                  _startLocation.Y + (100 * (float)value));
+
+                canvas.ResumeLayout(true);
+
+            })
+            .Commit(this, "Anim", length: 2000, easing: Easing.SpringOut, repeat: () => true);
+        }
+
+        private void AddRectangle()
+        {
+            _startLocation = new SKPoint(0, 0);
+           
+
+            _rectangle = new SkiaSharp.Elements.Rectangle(SKRect.Create(_startLocation, new SKSize(Convert.ToInt32(600), 200)))
+            {
+                FillColor = SKColors.SpringGreen,
+                BorderWidth = 0
+            };
+            canvas.Elements.Add(_rectangle);
+        }
+
+        private void Canvas_Touch(object sender, SkiaSharp.Views.Forms.SKTouchEventArgs e)
+        {
+            if (e.ActionType == SkiaSharp.Views.Forms.SKTouchAction.Pressed)
+            {
+                Play();
+            }
         }
     }
 }

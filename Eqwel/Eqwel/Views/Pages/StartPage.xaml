@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
              xmlns:menuComponent="clr-namespace:Eqwel.ViewModels.Components.MenuComponents"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:views="clr-namespace:Eqwel.Views"
              x:Class="Eqwel.Views.Pages.StartPage"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
@@ -19,14 +21,7 @@
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
             </Grid.GestureRecognizers>
             <AbsoluteLayout Grid.Row="0">
-                <pnck:PancakeView x:Name="startFrame"
-                                  AbsoluteLayout.LayoutFlags="None" >
-                    <Label Text="start"
-                           FontSize="50"
-                           FontFamily="Black"
-                           VerticalOptions="Center"
-                           HorizontalOptions="Center"/>
-                </pnck:PancakeView>
+                <views:CanvasView x:Name="canvas"  AbsoluteLayout.LayoutFlags="None" Touch="Canvas_Touch" EnableTouchEvents="True" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource PageBackgroundColor}"/>
                 <pnck:PancakeView x:Name="menuItemFrame"
                                   BackgroundColor="{DynamicResource ComponentColor}">
                     <Grid RowDefinitions="50,*">
