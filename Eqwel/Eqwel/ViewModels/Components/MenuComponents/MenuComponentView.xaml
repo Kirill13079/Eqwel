@@ -7,7 +7,7 @@
              x:Class="Eqwel.ViewModels.Components.MenuComponents.MenuComponentView">
   <ContentView.Content>
         <pnck:PancakeView BackgroundColor="Transparent" 
-                          WidthRequest="20"
+                          WidthRequest="30"
                           xct:TouchEffect.NativeAnimation="True"
                           CornerRadius="20">
             <pnck:PancakeView.GestureRecognizers>

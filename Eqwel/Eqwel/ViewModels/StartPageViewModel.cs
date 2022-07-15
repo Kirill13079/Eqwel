@@ -1,11 +1,13 @@
 ﻿using Eqwel.Enums;
 using Eqwel.Extensions;
 using Eqwel.ViewModels.Data;
+using Eqwel.Views.Pages;
 using MvvmHelpers;
 using System;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace Eqwel.ViewModels
 {
@@ -33,7 +35,18 @@ namespace Eqwel.ViewModels
             }
         }
 
-        public ICommand SelectedMenuItem { get; set; }
+        private MenuViewModel _selectedMenuItem;
+        public MenuViewModel SelectedMenuItem 
+        {
+            get => _selectedMenuItem;
+            set 
+            {
+                _selectedMenuItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public ICommand SelectedMenuItemCommand { get; set; }
 
         public StartPageViewModel()
         {
@@ -42,7 +55,7 @@ namespace Eqwel.ViewModels
 
         private void Initialize()
         {
-            SelectedMenuItem = new Command<MenuViewModel>(menuItem => SelectedMenuItemCommandHandler(menuItem));
+            SelectedMenuItemCommand = new Command<MenuViewModel>(menuItem => SelectedMenuItemCommandHandler(menuItem));
 
             GetMenu();
         }
@@ -86,7 +99,13 @@ namespace Eqwel.ViewModels
 
             if (menu != null)
             {
+                Menu.ForEach((test) => { test.IsActive = false; });
+
                 menu.IsActive = !menu.IsActive;
+
+                SelectedMenuItem = menu;
+
+                MessagingCenter.Send("MyApp", "NotifyMsg", SelectedMenuItem);
             }
         }
     }

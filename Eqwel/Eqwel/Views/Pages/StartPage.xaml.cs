@@ -1,5 +1,8 @@
 ﻿using Eqwel.Animations;
+using Eqwel.ViewModels.Data;
 using System;
+using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,6 +23,12 @@ namespace Eqwel.Views.Pages
             InitializeComponent();
 
             BindingContext = App.ViewModelLocator.StartPageViewModel;
+
+            MessagingCenter.Subscribe<string, MenuViewModel>("MyApp", "NotifyMsg", (sender, arg) =>
+            {
+                titleMenuItem.Text = arg.Title.ToLower();
+                SwitchAnimateMenuFrame();
+            });
         }
 
         protected override void OnAppearing()
@@ -43,6 +52,13 @@ namespace Eqwel.Views.Pages
 
             #region animate
 
+            State currentState = State.Start;
+
+            if (_animationState != null)
+            {
+                currentState = (State)_animationState.CurrentState;
+            }
+
             _animationState = new AnimationStateMachine();
 
             _animationState.Add(State.Start, new ViewTransition[]
@@ -57,7 +73,7 @@ namespace Eqwel.Views.Pages
                 new ViewTransition(menuItemFrame, Enums.AnimationType.Layout, endMenuComponentRect)
             });
 
-            _animationState.Go(State.Start, false);
+            _animationState.Go(currentState, false);
 
             #endregion
         }
@@ -68,9 +84,6 @@ namespace Eqwel.Views.Pages
             {
                 case State.Start:
                     _animationState.Go(State.End);
-                    break;
-                case State.End:
-                    _animationState.Go(State.Start);
                     break;
             }
         }
@@ -85,9 +98,26 @@ namespace Eqwel.Views.Pages
             await Navigation.PushAsync(new MainPage());
         }
 
-        public void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        private void TapGestureRecognizer_Tapped_1(object sender, EventArgs e)
         {
-            SwitchAnimateMenuFrame();
+            switch (_animationState.CurrentState)
+            {
+                case State.End:
+                    _animationState.Go(State.Start);
+                    break;
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            switch (_animationState.CurrentState)
+            {
+                case State.End:
+                    _animationState.Go(State.Start);
+                    break;
+            }
+
+            return base.OnBackButtonPressed();
         }
     }
 }

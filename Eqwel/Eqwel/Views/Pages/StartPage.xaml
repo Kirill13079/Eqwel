@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
              xmlns:menuComponent="clr-namespace:Eqwel.ViewModels.Components.MenuComponents"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="Eqwel.Views.Pages.StartPage"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
@@ -14,6 +15,9 @@
     
     <ContentPage.Content>
         <Grid RowDefinitions="*,80">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
+            </Grid.GestureRecognizers>
             <AbsoluteLayout Grid.Row="0">
                 <pnck:PancakeView x:Name="startFrame"
                                   AbsoluteLayout.LayoutFlags="None" >
@@ -25,66 +29,39 @@
                 </pnck:PancakeView>
                 <pnck:PancakeView x:Name="menuItemFrame"
                                   BackgroundColor="{DynamicResource ComponentColor}">
-                    
+                    <Grid RowDefinitions="50,*">
+                        <Label x:Name="titleMenuItem"
+                               FontSize="35"
+                               FontFamily="Bold"
+                               VerticalOptions="Start"
+                               HorizontalOptions="Center"/>
+                        <StackLayout Grid.Row="1"
+                                     Padding="50,20">
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="количество выученных слов" HorizontalOptions="EndAndExpand" VerticalOptions="Center"></Label>
+                                <Label Text="10" FontSize="35" FontFamily="Bold" HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="в процессе" HorizontalOptions="EndAndExpand" VerticalOptions="Center"></Label>
+                                <Label Text="13" FontSize="35" FontFamily="Bold" HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="сколько еще осталось" HorizontalOptions="EndAndExpand" VerticalOptions="Center"></Label>
+                                <Label Text="77" FontSize="35" FontFamily="Bold" HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                    </Grid>
                 </pnck:PancakeView>
             </AbsoluteLayout>
             <StackLayout Grid.Row="1"
+                         HorizontalOptions="CenterAndExpand"
                          BindableLayout.ItemsSource="{Binding Menu}"
                          BindableLayout.ItemTemplateSelector="{StaticResource menuComponent}"
                          BackgroundColor="Transparent"
                          Orientation="Horizontal"
-                         Spacing="130"
-                         Padding="20,20">
-                <StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
-                </StackLayout.GestureRecognizers>
+                         Spacing="100"
+                         Padding="10,10">
             </StackLayout>
         </Grid>
-        <!--<StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}" 
-                     VerticalOptions="CenterAndExpand" 
-                     Padding="20">
-        
-                          <pnck:PancakeView BackgroundColor="Transparent" 
-                                  WidthRequest="40"
-                                  xct:TouchEffect.NativeAnimation="True"
-                                  CornerRadius="20">
-                        <controls:TintedCachedImage x:Name="statsImage"   
-                                                SvgSource="Eqwel.Resources.Icons.chart.svg"
-                                                TintColor="{DynamicResource AccentColor}"/>
-                    </pnck:PancakeView>
-        
-            <pnck:PancakeView HeightRequest="120"
-                              BackgroundColor="{DynamicResource ComponentColor}" 
-                              CornerRadius="20">
-                <Grid ColumnDefinitions="*"
-                      RowDefinitions="*,*">
-                    <StackLayout Grid.Column="0" 
-                                 Orientation="Horizontal"
-                                 Padding="20,0">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="RussianModeTapped"/>
-                        </StackLayout.GestureRecognizers>
-                        <Label FontSize="{DynamicResource BodyLabelFontSize}"
-                               Margin="10,0"
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Start"
-                               Text="RU - EN"/>
-                    </StackLayout>
-                    <StackLayout Grid.Column="0"
-                                 Grid.Row="1"
-                                 Orientation="Horizontal"
-                                 Padding="20,0">
-                        <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="EnglishModeTapped"/>
-                        </StackLayout.GestureRecognizers>
-                        <Label FontSize="{DynamicResource BodyLabelFontSize}"
-                               Margin="10,0"
-                               VerticalOptions="Center" 
-                               HorizontalOptions="Start"
-                               Text="EN - RU"/>
-                    </StackLayout>
-                </Grid>
-            </pnck:PancakeView>
-        </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>

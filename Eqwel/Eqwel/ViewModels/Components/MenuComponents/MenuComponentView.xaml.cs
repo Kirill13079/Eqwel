@@ -24,10 +24,10 @@ namespace Eqwel.ViewModels.Components.MenuComponents
 
             icon.SvgSource = $"Eqwel.Resources.Icons.{_bindingContext.Icon}";
 
-            _bindingContext.PropertyChanged += _bindingContextPropertyChanged;
+            _bindingContext.PropertyChanged += BindingContextPropertyChanged;
         }
 
-        private void _bindingContextPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void BindingContextPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var activeColor = Color.FromHex("#84F73E");
             var disableColor = Color.FromHex("#040615");
@@ -37,7 +37,7 @@ namespace Eqwel.ViewModels.Components.MenuComponents
 
         private void MenuItemTapped(object sender, System.EventArgs e)
         {
-            App.ViewModelLocator.StartPageViewModel.SelectedMenuItem.Execute(_bindingContext);
+            App.ViewModelLocator.StartPageViewModel.SelectedMenuItemCommand.Execute(_bindingContext);
         }
     }
 }
