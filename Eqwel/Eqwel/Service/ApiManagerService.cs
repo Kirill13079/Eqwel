@@ -1,6 +1,7 @@
 ﻿using AngleSharp.Dom;
 using AngleSharp.Html.Dom;
 using AngleSharp.Html.Parser;
+using Eqwel.Enums;
 using Eqwel.Interfaces;
 using Eqwel.Models;
 using Eqwel.ViewModels.Data;
@@ -53,10 +54,15 @@ namespace Eqwel.Service
 
                         foreach (var item in dictionaryResponse)
                         {
-                            dictionaryViewModel.Add(new DictoinaryViewModel 
+                            dictionaryViewModel.Add(new DictoinaryViewModel
                             {
-                                English = item.English,
-                                Russian = item.Russian
+                                SourceLanguage = Language.English,
+                                TargetLanguage = Language.Russian,
+                                Translation = new TranslationModel
+                                {
+                                    Heading = item.English,
+                                    Transltion = item.Russian
+                                }
                             });
                         }
 

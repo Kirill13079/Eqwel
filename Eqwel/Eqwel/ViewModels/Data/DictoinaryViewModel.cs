@@ -1,27 +1,40 @@
-﻿using MvvmHelpers;
+﻿using Eqwel.Enums;
+using Eqwel.Models;
+using MvvmHelpers;
 
 namespace Eqwel.ViewModels.Data
 {
     public class DictoinaryViewModel : ObservableObject
     {
-        private string _english;
-        public string English
+        private Language _sourceLanguage;
+        public Language SourceLanguage
         {
-            get => _english;
+            get => _sourceLanguage;
             set
             {
-                _english = value;
+                _sourceLanguage = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _russian;
-        public string Russian
+        private Language _targetLanguage;
+        public Language TargetLanguage
         {
-            get => _russian;
+            get => _targetLanguage;
             set
             {
-                _russian = value;
+                _targetLanguage = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private TranslationModel _translation;
+        public TranslationModel Translation
+        {
+            get => _translation;
+            set
+            {
+                _translation = value;
                 OnPropertyChanged();
             }
         }

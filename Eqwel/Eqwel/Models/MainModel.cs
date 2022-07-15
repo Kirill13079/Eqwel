@@ -1,8 +1,6 @@
-﻿using Eqwel.ViewModels.Data;
+﻿using Eqwel.Enums;
+using Eqwel.ViewModels.Data;
 using MvvmHelpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Eqwel.Models
 {
@@ -19,13 +17,13 @@ namespace Eqwel.Models
             }
         }
 
-        private bool _mode;
-        public bool DictinoryMode
+        private ModeOption _dictinoryMode;
+        public ModeOption DictinoryMode
         {
-            get => _mode;
-            set
+            get => _dictinoryMode;
+            set 
             {
-                _mode = value;
+                _dictinoryMode = value;
                 OnPropertyChanged();
             }
         }
@@ -35,7 +33,6 @@ namespace Eqwel.Models
             Items = new ObservableRangeCollection<DictoinaryViewModel>();
 
             IsBusy = true;
-            DictinoryMode = false;
         }
     }
 }

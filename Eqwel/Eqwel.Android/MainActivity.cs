@@ -5,6 +5,7 @@ using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
 using PanCardView.Droid;
+using FFImageLoading.Forms.Platform;
 
 namespace Eqwel.Droid
 {
@@ -16,8 +17,9 @@ namespace Eqwel.Droid
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
+            CachedImageRenderer.Init(true);
             CardsViewRenderer.Preserve();
 
             LoadApplication(new App());

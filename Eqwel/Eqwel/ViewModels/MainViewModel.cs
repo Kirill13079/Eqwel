@@ -1,10 +1,12 @@
 ﻿using Eqwel.AppSettings;
+using Eqwel.Enums;
 using Eqwel.Models;
 using Eqwel.Service;
 using Eqwel.ViewModels.Data;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -90,7 +92,7 @@ namespace Eqwel.ViewModels
         {
             AcceptCommand = new Command((obj) => AcceptCommandHandler(obj));
 
-               _ = GetDataAsync().ConfigureAwait(false);
+            _ = GetDataAsync().ConfigureAwait(false);
         }
 
         public async Task GetDataAsync()
@@ -98,7 +100,7 @@ namespace Eqwel.ViewModels
             Correctly = 0;
             Wrong = 0;
 
-            Model.DictinoryMode = Setting.GetSetting(Setting.AppPrefrences.Mode) != "english";
+            Model.DictinoryMode = ModeOption.English;
 
             if (Model.Items.Any())
             {
@@ -119,40 +121,40 @@ namespace Eqwel.ViewModels
         {
             if (value != null)
             {
-                if (!Model.DictinoryMode)
-                {
-                    var item = Model.Items.Where(x => x.Russian.Contains((string)value) && x.IsUse).FirstOrDefault();
+                //if (!Model.DictinoryMode)
+                //{
+                //    var item = Model.Items.Where(x => x.Translation.Transltion.Contains((string)value) && x.IsUse).FirstOrDefault();
 
-                    if (item != null)
-                    {
-                        item.IsUse = false;
+                //    if (item != null)
+                //    {
+                //        item.IsUse = false;
 
-                        Correctly++;
-                        CurrentIndex++;
-                    }
-                    else 
-                    {
-                        CurrentIndex++;
-                        Wrong++;
-                    }
-                }
-                else 
-                {
-                    var item = Model.Items.Where(x => x.English.Contains((string)value) && x.IsUse).FirstOrDefault();
+                //        Correctly++;
+                //        CurrentIndex++;
+                //    }
+                //    else 
+                //    {
+                //        CurrentIndex++;
+                //        Wrong++;
+                //    }
+                //}
+                //else 
+                //{
+                //    var item = Model.Items.Where(x => x.Translation.Heading.Contains((string)value) && x.IsUse).FirstOrDefault();
 
-                    if (item != null)
-                    {
-                        item.IsUse = false;
+                //    if (item != null)
+                //    {
+                //        item.IsUse = false;
 
-                        Correctly++;
-                        CurrentIndex++;
-                    }
-                    else
-                    {
-                        CurrentIndex++;
-                        Wrong++;
-                    }
-                }
+                //        Correctly++;
+                //        CurrentIndex++;
+                //    }
+                //    else
+                //    {
+                //        CurrentIndex++;
+                //        Wrong++;
+                //    }
+                //}
             }
         }
     }

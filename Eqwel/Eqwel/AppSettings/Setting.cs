@@ -7,8 +7,7 @@ namespace Eqwel.AppSettings
     {
         public enum AppPrefrences
         {
-            AppTheme,
-            Mode
+            AppTheme
         }
 
         public enum Theme

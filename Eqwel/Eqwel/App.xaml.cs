@@ -1,7 +1,7 @@
-﻿using Eqwel.Views.Pages;
-using System;
+﻿using Eqwel.Interfaces;
+using Eqwel.Service;
+using Eqwel.Views.Pages;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 [assembly: ExportFont("Montserrat-Medium.ttf", Alias = "Medium")]
 [assembly: ExportFont("Prompt-Black.ttf", Alias = "Black")]
@@ -10,6 +10,9 @@ namespace Eqwel
 {
     public partial class App : Application
     {
+        private static IViewModelLocator _viewModelLocator;
+        public static IViewModelLocator ViewModelLocator => _viewModelLocator ?? (_viewModelLocator = new ViewModelLocatorService());
+
         public App()
         {
             InitializeComponent();

@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:enums="clr-namespace:Eqwel.Enums"
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView" 
              xmlns:proc="clr-namespace:PanCardView.Processors;assembly=PanCardView" 
              xmlns:converters="clr-namespace:Eqwel.Converters"
@@ -10,12 +12,6 @@
              BackgroundColor="{DynamicResource PageBackgroundColor}"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!--<converters:StringToBoolConverter x:Key="ModeConvertert" Mode="{Binding Mode}"/>-->
-        </ResourceDictionary>
-    </ContentPage.Resources>
-    
     <Grid RowDefinitions="60,*,120" Padding="10">
         <StackLayout>
             <Label FontSize="{StaticResource H1FontSize}"
@@ -48,11 +44,9 @@
                             Grid.Row="1"
                             IsVerticalSwipeEnabled="False"
                             SelectedIndex="{Binding CurrentIndex}">
-
             <x:Arguments>
                 <proc:CarouselProcessor ScaleFactor="0.5" OpacityFactor="0" RotationFactor="0.1" />
             </x:Arguments>
-
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
@@ -60,26 +54,25 @@
                             <pnck:PancakeView CornerRadius="20" IsVisible="{Binding IsUse}">
                                 <StackLayout BackgroundColor="{DynamicResource ComponentColor}" 
                                              Padding="10">
-                                    <Label Text="{Binding Russian}"
-                                           FontSize="{StaticResource H1FontSize}"
+                                    <Label FontSize="{StaticResource H1FontSize}"
                                            FontFamily="Medium"
                                            VerticalOptions="CenterAndExpand"
                                            HorizontalOptions="CenterAndExpand"
-                                           IsVisible="{Binding Mode}">
-                                        <Label.Triggers>
+                                           IsVisible="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}, Converter={StaticResource EnumModeConvertert}}">
+                                        <!--<Label.Triggers>
                                             <DataTrigger TargetType="Label" 
                                                          Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
                                                          Value="True">
                                                 <Setter Property="Text" 
-                                                        Value="{Binding Russian}"/>
+                                                        Value="{Binding Translation.Transltion}"/>
                                             </DataTrigger>
                                             <DataTrigger TargetType="Label" 
                                                          Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
                                                          Value="False">
                                                 <Setter Property="Text" 
-                                                        Value="{Binding English}"/>
+                                                        Value="{Binding Translation.Heading}"/>
                                             </DataTrigger>
-                                        </Label.Triggers>
+                                        </Label.Triggers>-->
                                     </Label>
                                 </StackLayout>
                             </pnck:PancakeView>

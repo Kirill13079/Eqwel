@@ -1,13 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:pnck="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" 
+             xmlns:menuComponent="clr-namespace:Eqwel.ViewModels.Components.MenuComponents"
              x:Class="Eqwel.Views.Pages.StartPage"
              NavigationPage.HasNavigationBar="False"
              BackgroundColor="{DynamicResource PageBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <menuComponent:MenuComponentDataTemplateSelector x:Key="menuComponent"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}" VerticalOptions="CenterAndExpand" Padding="20">
-            <pnck:PancakeView HeightRequest="120" BackgroundColor="{DynamicResource ComponentColor}" CornerRadius="20">
+        <Grid RowDefinitions="*,80">
+            <AbsoluteLayout Grid.Row="0">
+                <pnck:PancakeView x:Name="startFrame"
+                                  AbsoluteLayout.LayoutFlags="None" >
+                    <Label Text="start"
+                           FontSize="50"
+                           FontFamily="Black"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </pnck:PancakeView>
+                <pnck:PancakeView x:Name="menuItemFrame"
+                                  BackgroundColor="{DynamicResource ComponentColor}">
+                    
+                </pnck:PancakeView>
+            </AbsoluteLayout>
+            <StackLayout Grid.Row="1"
+                         BindableLayout.ItemsSource="{Binding Menu}"
+                         BindableLayout.ItemTemplateSelector="{StaticResource menuComponent}"
+                         BackgroundColor="Transparent"
+                         Orientation="Horizontal"
+                         Spacing="130"
+                         Padding="20,20">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"></TapGestureRecognizer>
+                </StackLayout.GestureRecognizers>
+            </StackLayout>
+        </Grid>
+        <!--<StackLayout BackgroundColor="{DynamicResource PageBackgroundColor}" 
+                     VerticalOptions="CenterAndExpand" 
+                     Padding="20">
+        
+                          <pnck:PancakeView BackgroundColor="Transparent" 
+                                  WidthRequest="40"
+                                  xct:TouchEffect.NativeAnimation="True"
+                                  CornerRadius="20">
+                        <controls:TintedCachedImage x:Name="statsImage"   
+                                                SvgSource="Eqwel.Resources.Icons.chart.svg"
+                                                TintColor="{DynamicResource AccentColor}"/>
+                    </pnck:PancakeView>
+        
+            <pnck:PancakeView HeightRequest="120"
+                              BackgroundColor="{DynamicResource ComponentColor}" 
+                              CornerRadius="20">
                 <Grid ColumnDefinitions="*"
                       RowDefinitions="*,*">
                     <StackLayout Grid.Column="0" 
@@ -37,6 +85,6 @@
                     </StackLayout>
                 </Grid>
             </pnck:PancakeView>
-        </StackLayout>
+        </StackLayout>-->
     </ContentPage.Content>
 </ContentPage>
