@@ -61,7 +61,8 @@ namespace Eqwel.Service
                                 Translation = new TranslationModel
                                 {
                                     Heading = item.English,
-                                    Transltion = item.Russian
+                                    Transltion = item.Russian,
+                                    Transcription = item.Transcription
                                 }
                             });
                         }

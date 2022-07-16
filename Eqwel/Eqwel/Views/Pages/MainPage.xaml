@@ -73,6 +73,13 @@
                                             </DataTrigger>
                                         </Label.Triggers>
                                     </Label>
+                                    <Label FontSize="{StaticResource H1FontSize}"
+                                           FontFamily="Medium"
+                                           VerticalOptions="CenterAndExpand"
+                                           HorizontalOptions="CenterAndExpand"
+                                           Text="{Binding Transcription}">
+   
+                                    </Label>
                                 </StackLayout>
                             </pnck:PancakeView>
                         </Grid>

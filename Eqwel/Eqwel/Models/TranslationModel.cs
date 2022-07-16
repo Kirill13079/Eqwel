@@ -25,5 +25,16 @@ namespace Eqwel.Models
                 OnPropertyChanged();
             }
         }
+
+        private string _transcription;
+        public string Transcription
+        {
+            get => _transcription;
+            set
+            {
+                _transcription = value;
+                OnPropertyChanged();
+            }
+        }
     }
 }

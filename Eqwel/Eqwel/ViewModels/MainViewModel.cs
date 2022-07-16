@@ -124,7 +124,7 @@ namespace Eqwel.ViewModels
                 switch (Model.DictinoryMode)
                 {
                     case ModeOption.English:
-                        var item = Model.Items.FirstOrDefault(x => x.Translation.Transltion.Contains((string)value) && x.IsUse);
+                        var item = Model.Items.FirstOrDefault(x => x.Translation.Transltion.Contains(((string)value).Trim()) && x.IsUse);
                         if (item != null)
                         {
                             item.IsUse = false;

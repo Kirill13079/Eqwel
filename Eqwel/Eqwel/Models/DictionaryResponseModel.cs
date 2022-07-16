@@ -9,5 +9,8 @@ namespace Eqwel.Models
 
         [JsonProperty("ru")]
         public string Russian { get; set; }
+
+        [JsonProperty("transcription")]
+        public string Transcription { get; set; }
     }
 }
