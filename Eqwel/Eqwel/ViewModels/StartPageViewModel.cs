@@ -93,7 +93,10 @@ namespace Eqwel.ViewModels
 
         public void SelectedMenuItemCommandHandler(MenuViewModel selectedMenuItem)
         {
-            bool isSelectedMenuItem(MenuViewModel menuItem) => menuItem.Equals(selectedMenuItem);
+            bool isSelectedMenuItem(MenuViewModel menuItem)
+            {
+                return menuItem.Equals(selectedMenuItem);
+            }
 
             var menu = Menu.FirstOrDefault(predicate: menuItem => isSelectedMenuItem(menuItem));
 

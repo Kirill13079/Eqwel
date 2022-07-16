@@ -20,6 +20,7 @@ namespace Eqwel.Droid
             Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             CachedImageRenderer.Init(true);
+
             CardsViewRenderer.Preserve();
 
             LoadApplication(new App());

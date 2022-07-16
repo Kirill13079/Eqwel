@@ -21,7 +21,17 @@
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped_1"/>
             </Grid.GestureRecognizers>
             <AbsoluteLayout Grid.Row="0">
-                <views:CanvasView x:Name="canvas"  AbsoluteLayout.LayoutFlags="None" Touch="Canvas_Touch" EnableTouchEvents="True" VerticalOptions="FillAndExpand" BackgroundColor="{DynamicResource PageBackgroundColor}"/>
+                <pnck:PancakeView x:Name="canvas"  
+                                  AbsoluteLayout.LayoutFlags="None" 
+                                  VerticalOptions="FillAndExpand" 
+                                  BackgroundColor="{DynamicResource PageBackgroundColor}">
+                    <pnck:PancakeView.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RussianModeTapped"></TapGestureRecognizer>
+                    </pnck:PancakeView.GestureRecognizers>
+                    <Label Text="start">
+                        
+                    </Label>
+                </pnck:PancakeView>
                 <pnck:PancakeView x:Name="menuItemFrame"
                                   BackgroundColor="{DynamicResource ComponentColor}">
                     <Grid RowDefinitions="50,*">
@@ -48,7 +58,7 @@
                     </Grid>
                 </pnck:PancakeView>
             </AbsoluteLayout>
-            <StackLayout Grid.Row="1"
+            <StackLayout Grid.Row="2"
                          HorizontalOptions="CenterAndExpand"
                          BindableLayout.ItemsSource="{Binding Menu}"
                          BindableLayout.ItemTemplateSelector="{StaticResource menuComponent}"

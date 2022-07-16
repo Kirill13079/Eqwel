@@ -121,6 +121,25 @@ namespace Eqwel.ViewModels
         {
             if (value != null)
             {
+                switch (Model.DictinoryMode)
+                {
+                    case ModeOption.English:
+                        var item = Model.Items.FirstOrDefault(x => x.Translation.Transltion.Contains((string)value) && x.IsUse);
+                        if (item != null)
+                        {
+                            item.IsUse = false;
+
+                            Correctly++;
+                            CurrentIndex++;
+                        }
+                        else
+                        {
+                            CurrentIndex++;
+                            Wrong++;
+                        }
+                        break;
+                }
+
                 //if (!Model.DictinoryMode)
                 //{
                 //    var item = Model.Items.Where(x => x.Translation.Transltion.Contains((string)value) && x.IsUse).FirstOrDefault();

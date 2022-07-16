@@ -57,22 +57,21 @@
                                     <Label FontSize="{StaticResource H1FontSize}"
                                            FontFamily="Medium"
                                            VerticalOptions="CenterAndExpand"
-                                           HorizontalOptions="CenterAndExpand"
-                                           IsVisible="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}, Converter={StaticResource EnumModeConvertert}}">
-                                        <!--<Label.Triggers>
+                                           HorizontalOptions="CenterAndExpand">
+                                        <Label.Triggers>
                                             <DataTrigger TargetType="Label" 
-                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
+                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}, Converter={StaticResource EnumModeConvertert}}"
                                                          Value="True">
                                                 <Setter Property="Text" 
                                                         Value="{Binding Translation.Transltion}"/>
                                             </DataTrigger>
                                             <DataTrigger TargetType="Label" 
-                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}}"
+                                                         Binding="{Binding Path=BindingContext.Model.DictinoryMode, Source={x:Reference carouselView}, Converter={StaticResource EnumModeConvertert}}"
                                                          Value="False">
                                                 <Setter Property="Text" 
                                                         Value="{Binding Translation.Heading}"/>
                                             </DataTrigger>
-                                        </Label.Triggers>-->
+                                        </Label.Triggers>
                                     </Label>
                                 </StackLayout>
                             </pnck:PancakeView>
